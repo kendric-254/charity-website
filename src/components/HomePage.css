@@ -118,7 +118,7 @@ body {
     40% { transform: translateY(-30px); }
     60% { transform: translateY(-15px); }
 }
-
+/* this  will make it have a cool feel ama aje wadau */
 .card:hover {
     animation: bounce 1s;
 }
