@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import donateImg from '../assets/images/donate.jpg';
 
 export default function DonatePage() {
     return (
@@ -23,12 +24,19 @@ export default function DonatePage() {
                         Every contribution makes a tangible difference. Help us reach more people in need of rehabilitation and support.
                     </p>
                 </div>
-                <div className="col-md-6">
-                    <img
-                        src="https://via.placeholder.com/500x300"
-                        alt="Donate"
-                        className="img-fluid rounded"
-                    />
+                  {/* Image 3: Donate */}
+                  <div className="col-md-4 mb-4">
+                    <div className="card">
+                        <img
+                            src={donateImg}
+                            className="card-img-top"
+                            alt="Donate"
+                        />
+                        <div className="card-body">
+                            <h5 className="card-title">Make a Difference</h5>
+                            <p className="card-text">Your donations make a significant impact. Learn how you can contribute.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

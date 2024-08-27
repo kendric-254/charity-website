@@ -1,0 +1,134 @@
+/* Text Slider Container */
+.text-slider-container {
+    overflow: hidden;
+    position: relative;
+    height: 150px; /* Adjust height as needed */
+    margin-bottom: 30px; /* Increased margin for better separation */
+    background: #f8f9fa; /* Light background for better contrast */
+    border-radius: 10px; /* More rounded corners for a modern look */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for better depth */
+}
+
+/* Sliding Animation */
+.text-slider {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    animation: slide 10s infinite;
+}
+
+/* Keyframes for Sliding Effect */
+@keyframes slide {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+
+/* Artistic Text Styling */
+.text-slider h1,
+.text-slider p {
+    font-size: 1.8rem; /* Adjust size as needed */
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    font-weight: bold;
+    margin: 0;
+    text-transform: capitalize; /* Capitalize first letter of each word */
+    letter-spacing: 0.5px; /* Adjust spacing for artistic effect */
+}
+
+/* Additional Text Styling */
+.text-slider h1 {
+    font-size: 2.5rem; /* Larger font size for the heading */
+    color: #c0392b; /* Example color */
+}
+
+.text-slider p {
+    font-size: 1.2rem; /* Adjust size for the paragraph */
+    color: #2980b9; /* Example color */
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: 15px; /* More rounded corners for a modern look */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow for more depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
+}
+
+/* Card Image Styling */
+.card-img-top {
+    border-bottom: 2px solid #ddd;
+    height: 250px; /* Increased height for better image visibility */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+/* Logo Container Styling */
+.logo-container {
+    position: absolute;
+    top: 20px; /* Create space from the top edge */
+    left: 20px; /* Create space from the left edge */
+    padding: 10px;
+    z-index: 10;
+    background: #ffffff; /* White background for logo visibility */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for better appearance */
+}
+
+/* Customize logo size */
+.logo {
+    max-width: 150px; /* Slightly larger size for better visibility */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Optional: Add spacing to avoid overlapping with other content */
+body {
+    padding-top: 90px; /* Adjust based on logo height and additional margin */
+}
+
+/* Additional Container Styling */
+.container {
+    position: relative; /* Ensure proper positioning of the logo container */
+    padding: 30px; /* Increased padding for better content spacing */
+    background: #f8f9fa; /* Light background for the container */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for the container */
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.text-slider h1,
+.text-slider p {
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-30px); }
+    60% { transform: translateY(-15px); }
+}
+
+.card:hover {
+    animation: bounce 1s;
+}
+
+/* Rotate Animation */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.logo {
+    animation: rotate 5s linear infinite;
+}
