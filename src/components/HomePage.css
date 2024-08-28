@@ -4,9 +4,9 @@
     position: relative;
     height: 150px; /* Adjust height as needed */
     margin-bottom: 30px; /* Increased margin for better separation */
-    background: #f8f9fa; /* Light background for better contrast */
+    background: #2c3e50; /* Dark blue background for contrast */
     border-radius: 10px; /* More rounded corners for a modern look */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow for better depth */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Stronger shadow for better depth */
 }
 
 /* Sliding Animation */
@@ -30,7 +30,7 @@
     font-size: 1.8rem; /* Adjust size as needed */
     text-align: center;
     padding: 20px;
-    color: #333;
+    color: #ecf0f1; /* Light gray text for better readability */
     font-weight: bold;
     margin: 0;
     text-transform: capitalize; /* Capitalize first letter of each word */
@@ -39,13 +39,14 @@
 
 /* Additional Text Styling */
 .text-slider h1 {
-    font-size: 2.5rem; /* Larger font size for the heading */
-    color: #c0392b; /* Example color */
+    font-size: 2rem; /* Reduced size to avoid overflowing */
+    color: #d35400; /* Bright orange for attention */
+    margin-top: 60px; /* Added margin to avoid overlap with logo */
 }
 
 .text-slider p {
     font-size: 1.2rem; /* Adjust size for the paragraph */
-    color: #2980b9; /* Example color */
+    color: #3498db; /* Bright blue for contrast */
 }
 
 /* Card Styling */
@@ -53,18 +54,19 @@
     border: none;
     border-radius: 15px; /* More rounded corners for a modern look */
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow for more depth */
+    background: #34495e; /* Darker blue background for cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow for more depth */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
 
 .card:hover {
     transform: translateY(-5px); /* Lift card on hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35); /* Stronger shadow on hover */
 }
 
 /* Card Image Styling */
 .card-img-top {
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid #34495e; /* Darker border for the image */
     height: 250px; /* Increased height for better image visibility */
     object-fit: cover; /* Ensure the image covers the area without distortion */
 }
@@ -76,9 +78,9 @@
     left: 20px; /* Create space from the left edge */
     padding: 10px;
     z-index: 10;
-    background: #ffffff; /* White background for logo visibility */
+    background: #2c3e50; /* Dark blue background for logo container */
     border-radius: 10px; /* Rounded corners for a modern look */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for better appearance */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Shadow for better appearance */
 }
 
 /* Customize logo size */
@@ -90,15 +92,17 @@
 /* Optional: Add spacing to avoid overlapping with other content */
 body {
     padding-top: 90px; /* Adjust based on logo height and additional margin */
+    background-color: #2c3e50; /* Dark blue background for the body */
+    color: #ecf0f1; /* Light gray text color */
 }
 
 /* Additional Container Styling */
 .container {
     position: relative; /* Ensure proper positioning of the logo container */
     padding: 30px; /* Increased padding for better content spacing */
-    background: #f8f9fa; /* Light background for the container */
+    background: #34495e; /* Darker blue background for container */
     border-radius: 10px; /* Rounded corners for a softer look */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for the container */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for the container */
 }
 
 /* Fade-in Animation */
@@ -118,7 +122,7 @@ body {
     40% { transform: translateY(-30px); }
     60% { transform: translateY(-15px); }
 }
-/* this  will make it have a cool feel ama aje wadau */
+
 .card:hover {
     animation: bounce 1s;
 }

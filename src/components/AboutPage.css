@@ -1,0 +1,107 @@
+/* About Page Container */
+.container {
+    padding: 40px; /* Increased padding for better content spacing */
+    background: #ffffff; /* Light background for the container */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for the container */
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 2.8rem; /* Larger font size for the main heading */
+    color: #e74c3c; /* Bright red for emphasis */
+    margin-bottom: 30px; /* Space below the heading */
+}
+
+/* Lead Paragraph Styling */
+p.lead {
+    font-size: 1.4rem; /* Slightly larger font size for emphasis */
+    color: #3498db; /* Bright blue for a softer tone */
+    font-weight: bold; /* Bold text for better readability */
+    margin-bottom: 40px; /* Increased margin for separation */
+}
+
+/* Section Heading Styling */
+h3 {
+    font-size: 2rem; /* Larger font size for section headings */
+    color: #105b60; /* Dark blue for better contrast */
+    margin-bottom: 20px; /* Space below section headings */
+}
+
+/* Text Content Styling */
+p {
+    font-size: 1.1rem; /* Standard font size for paragraphs */
+    color: #555555; /* Slightly darker color for readability */
+    line-height: 1.7; /* Increased line-height for better readability */
+}
+
+/* Image Styling */
+.img-fluid {
+    border-radius: 15px; /* Rounded corners for images */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Image Hover Effect */
+.img-fluid:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    h1 {
+        font-size: 2.2rem; /* Adjust font size for smaller screens */
+    }
+
+    h3 {
+        font-size: 1.7rem; /* Adjust font size for section headings */
+    }
+
+    p.lead {
+        font-size: 1.2rem; /* Adjust font size for lead paragraphs */
+    }
+
+    /* Adjust image order for mobile view */
+    .order-md-2 {
+        order: 1;
+    }
+
+    .order-md-1 {
+        order: 2;
+    }
+}
+
+/* AboutPage.css */
+
+/* Card Styling */
+.card {
+    border: 1px solid #2c3e50; /* Dark Blue border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.card-header {
+    background-color: #2c3e50; /* Dark Blue */
+    color: #ecf0f1; /* Light color for contrast */
+    font-weight: bold;
+}
+
+.card-body {
+    background-color: #ffffff; /* Light background for readability */
+    color: #333333; /* Dark text color */
+}
+
+/* Quote Styling */
+blockquote.quote {
+    font-style: italic;
+    font-family: 'Dancing Script', cursive; /* Romantic style */
+    color: #2c3e50; /* Dark Blue */
+    border-left: 4px solid #2c3e50; /* Decorative left border */
+    padding-left: 20px;
+    margin: 20px 0;
+}

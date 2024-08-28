@@ -23,7 +23,7 @@ export default function HomePage() {
             <div className="text-slider-container">
                 <div className="text-slider">
                     <h1>Welcome to the Charity Website</h1>
-                    <p>Our mission is to raise funds to support drug rehabilitation programs and help individuals on their journey to recovery.</p>
+                    <p>Our mission is to raise funds <br/> to support drug rehabilitation programs<br/> and help individuals on their journey to recovery.</p>
                 </div>
             </div>
 

@@ -1,26 +1,30 @@
 import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown, Button, Container, Badge, Modal } from 'react-bootstrap';
 import Home from './components/HomePage';
 import About from './components/AboutPage';
+import ProgramsPage from './components/ProgramsPage';
 import Donate from './components/DonatePage';
 import Contact from './components/ContactPage';
-import ProgramsPage from './components/ProgramsPage';
 import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage'; // Ensure this component exists
+import RegisterPage from './components/RegisterPage';
 import Dashboard from './components/DashboardPage';
-import { AuthContext, AuthProvider } from './contexts/AuthContext'; // Ensure correct import
+import { AuthContext, AuthProvider } from './contexts/AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button } from 'react-bootstrap'; // Import Bootstrap Modal
+import './App.css'; // Import custom styles for further customization
+import DonationFormPage from './components/DonationFormPage';
+import MpesaConfirmationPage from './components/MpesaConfirmationPage';
+import ConfirmationPage from './components/ConfirmationPage';
 
 // Protected Route Component
-const ProtectedRoute = ({ element, ...rest }) => {
+const ProtectedRoute = ({ element: Component }) => {
   const { isAuthenticated } = useContext(AuthContext);
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  return isAuthenticated ? <Component /> : <Navigate to="/login" />;
 };
 
 function App() {
   const { isAuthenticated } = useContext(AuthContext);
-  const [notificationsCount, setNotificationsCount] = useState(5); // Example count
+  const [notificationsCount, setNotificationsCount] = useState(5);
 
   // Modal States
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -35,56 +39,52 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div className="container-fluid">
-            <Link className="navbar-brand" to="/">Charity Website</Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/">Home</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/about">About</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/programs">Programs</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/donate">Donate</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/contact">Contact</Link>
-                </li>
-                <li className="nav-item dropdown">
-                  <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i className="fas fa-bell"></i>
-                    {notificationsCount > 0 && (
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {notificationsCount}
-                      </span>
-                    )}
-                  </Link>
-                  <ul className="dropdown-menu dropdown-menu-end">
-                    <li><Link className="dropdown-item" to="#">View All Notifications</Link></li>
-                  </ul>
-                </li>
+        <Navbar bg="dark" variant="dark" expand="lg" className="mb-3">
+          <Container>
+            <Navbar.Brand as={Link} to="/">
+              <span className="glowing-heading">Hope's Horizon: A Path to Recovery</span>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbarNav" />
+            <Navbar.Collapse id="navbarNav">
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/about">About</Nav.Link>
+                <Nav.Link as={Link} to="/programs">Programs</Nav.Link>
+                <Nav.Link as={Link} to="/donate">Donate</Nav.Link>
+                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+                <NavDropdown
+                  title={
+                    <>
+                      <i className="fas fa-bell"></i>
+                      {notificationsCount > 0 && (
+                        <Badge bg="danger" pill className="ms-1">
+                          {notificationsCount}
+                        </Badge>
+                      )}
+                    </>
+                  }
+                  id="notifications-dropdown"
+                >
+                  <NavDropdown.Item as={Link} to="#">
+                    View All Notifications
+                  </NavDropdown.Item>
+                </NavDropdown>
                 {!isAuthenticated ? (
-                  <li className="nav-item">
-                    <Button variant="primary" onClick={handleRegisterModalShow}>Register</Button>
-                    <Button variant="secondary" onClick={handleLoginModalShow}>Login</Button>
-                  </li>
+                  <div className="d-flex align-items-center">
+                    <Button variant="primary" onClick={handleRegisterModalShow} className="me-2">
+                      Register
+                    </Button>
+                    <Button variant="secondary" onClick={handleLoginModalShow}>
+                      Login
+                    </Button>
+                  </div>
                 ) : (
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                  </li>
+                  <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                 )}
-              </ul>
-            </div>
-          </div>
-        </nav>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
 
         {/* Modals for Login and Register */}
         <Modal show={showLoginModal} onHide={handleLoginModalClose}>
@@ -114,7 +114,10 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+            <Route path="/dashboard" element={<ProtectedRoute element={Dashboard} />} />
+            <Route path="/donate-form" element={<DonationFormPage />} />
+            <Route path="/donate/mpesa" element={<MpesaConfirmationPage />} />
+            <Route path="/confirmation" element={<ConfirmationPage />} />
           </Routes>
         </div>
       </Router>

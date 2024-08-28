@@ -1,38 +1,115 @@
-.App {
+/* Navbar Link Styling */
+.navbar-nav .nav-link {
+  color: #992fba; /* Purple */
+}
+
+/* Navbar Brand Styling */
+.navbar-brand {
+  color: #30788a; /* Light color for contrast */
+  font-family: 'Times New Roman', Times, serif; /* Elegant font for the title */
+  font-size: 1.75rem; /* Larger font size for prominence */
+}
+
+/* Badge Styling */
+.badge-danger {
+  font-size: 0.75rem;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background-color: #95a32c; /* Green */
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  width: 300px;
+  background-color: #ff6f61; /* Coral */
+}
+
+.dropdown-item:hover {
+  background-color: #ffcc00; /* Yellow */
+  color: rgb(37, 142, 195);
+}
+
+/* Container Fluid Styling */
+.container-fluid {
+  max-width: 1200px;
+  background-color: #ffcc00; /* Yellow */
+}
+
+/* Additional Responsive Design Adjustments */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .navbar-nav .nav-link {
+    margin-bottom: 10px;
+    color: #6b5b95; /* Purple */
+  }
+  .d-flex.align-items-center {
+    flex-direction: column;
+  }
+}
+
+/* Rainbow Gradient Background for Navbar */
+.navbar {
+  background: linear-gradient(90deg, #ff6f61, #ffcc00, #88b04b, #6b5b95, #92a8d1, #f7cac9, #955251);
+}
+
+/* Rainbow Gradient for Dropdown Menu */
+.dropdown-menu {
+  background: linear-gradient(90deg, #ff6f61, #ffcc00, #88b04b, #6b5b95, #92a8d1, #f7cac9, #955251);
+}
+
+/* Reduced Heading Size */
+.glowing-heading {
+  font-size: 2rem; /* Reduced size to avoid overflowing */
+  font-weight: bold;
+  color: #28126fb5; /* Light color for better contrast */
   text-align: center;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Burger Menu Styling */
+.hamburger {
+  display: none;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.hamburger .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #04053a;
+}
+
+/* Media Query for Burger Menu */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+  .navbar-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background-color: #2d1278; /* Yellow */
+  }
+  .navbar-nav.active {
+    display: flex;
+  }
+  .navbar-nav .nav-link {
+    margin: 10px 0;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Toggle Burger Menu */
+.navbar-toggler {
+  border: none;
+  background: transparent;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba%2899, 99, 99, 0.5%29" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
 }
