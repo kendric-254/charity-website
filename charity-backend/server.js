@@ -1,91 +1,63 @@
 require('dotenv').config();
 const express = require('express');
+const axios = require('axios');
 const bodyParser = require('body-parser');
-const twilio = require('twilio');
-const { Sequelize, DataTypes } = require('sequelize');
-
 const app = express();
 
-// Set up body parser
 app.use(bodyParser.json());
 
-// Twilio credentials
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = twilio(accountSid, authToken);
-
-// Sequelize setup for MySQL
-const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: 'mysql',
-    port: process.env.DB_PORT,
-    logging: false,
-});
-
-// Test connection to database
-sequelize.authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
-
-// Donation model
-const Donation = sequelize.define('Donation', {
-    amount: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-    },
-    mobileNumber: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-});
-
-// Sync database
-sequelize.sync();
-
-// Endpoint to record donations
-app.post('/api/donate', async (req, res) => {
-    const { mobileNumber, amount } = req.body;
+// Generate access token
+const generateToken = async () => {
+    const url = `https://${process.env.MPESA_ENV}.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials`;
+    const auth = Buffer.from(`${process.env.CONSUMER_KEY}:${process.env.CONSUMER_SECRET}`).toString('base64');
 
     try {
-        console.log(`Received donation of KSh ${amount} from ${mobileNumber}`);
-        // Record donation
-        await Donation.create({ amount, mobileNumber });
-
-        // Calculate total donations
-        const totalDonations = await Donation.sum('amount');
-
-        // Send SMS confirmation
-        await client.messages.create({
-            body: `Thank you for your donation of KSh ${amount}. Total donations: KSh ${totalDonations}.`,
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: mobileNumber,
+        const { data } = await axios.get(url, {
+            headers: {
+                Authorization: `Basic ${auth}`,
+            },
         });
-
-        res.status(200).json({ success: true, message: 'Donation recorded and SMS sent!' });
+        return data.access_token;
     } catch (error) {
-        console.error('Error processing donation:', error);
-        res.status(500).json({ success: false, message: 'Failed to record donation', error: error.message });
+        console.error('Error generating token', error);
     }
-});
+};
 
-// Test Twilio setup
-app.get('/test-sms', async (req, res) => {
+// Lipa na M-Pesa Online
+const lipaNaMpesaOnline = async (req, res) => {
+    const token = await generateToken();
+    const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 14);
+    const password = Buffer.from(`${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY}${timestamp}`).toString('base64');
+
+    const payload = {
+        BusinessShortCode: process.env.MPESA_SHORTCODE,
+        Password: password,
+        Timestamp: timestamp,
+        TransactionType: 'CustomerPayBillOnline',
+        Amount: req.body.amount, // Amount to charge
+        PartyA: req.body.phone, // Customer's phone number in format 2547XXXXXXXX
+        PartyB: process.env.MPESA_SHORTCODE,
+        PhoneNumber: req.body.phone, // Same as PartyA
+        CallBackURL: process.env.CALLBACK_URL,
+        AccountReference: 'Charity Donation',
+        TransactionDesc: 'Donation Payment'
+    };
+
     try {
-        await client.messages.create({
-            body: 'This is a test message',
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: '+254757210923', // Replace with a valid phone number
+        const { data } = await axios.post(`https://${process.env.MPESA_ENV}.safaricom.co.ke/mpesa/stkpush/v1/processrequest`, payload, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         });
-        res.status(200).json({ success: true, message: 'Test SMS sent successfully!' });
+        res.status(200).json(data);
     } catch (error) {
-        console.error('Error sending test SMS:', error);
-        res.status(500).json({ success: false, message: 'Failed to send test SMS', error: error.message });
+        console.error('Error initiating payment', error);
+        res.status(500).json({ error: 'Payment initiation failed' });
     }
-});
+};
+
+// Endpoint to initiate payment
+app.post('/api/donate', lipaNaMpesaOnline);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
